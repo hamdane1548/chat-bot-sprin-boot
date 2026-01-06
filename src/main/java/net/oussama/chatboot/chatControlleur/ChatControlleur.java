@@ -14,7 +14,7 @@ public class ChatControlleur {
        this.agentai = agentai;
    }
    @GetMapping(value = "/chat",produces = MediaType.TEXT_PLAIN_VALUE)
-    public String chatAgent(String message) {
+    public Flux<String> chatAgent(String message) {
        return agentai.chat(message);
    }
 }

@@ -48,10 +48,10 @@ public class Agentai {
                 .defaultToolCallbacks(toolCallbackProvider)
                 .build();
     }
-    public String chat(String message) {
+    public Flux<String> chat(String message) {
         return chatClient.prompt()
                 .user(message)
-                .call()
+                .stream()
                 .content();
     }
 }

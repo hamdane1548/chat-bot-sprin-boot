@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import reactor.core.publisher.Flux;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -40,8 +41,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         Long chatId = update.getMessage().getChatId();
 
         senTypingQuestion(chatId);
-        String answer= agentai.chat(message);
-        sendTextMessage(chatId,answer);
+       Flux<String> answer= agentai.chat(message);
+        sendTextMessage(chatId, String.valueOf(answer));
     }
 
     @Override
